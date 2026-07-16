@@ -25,20 +25,57 @@ npm install --save-dev madge madge-config-nick2bad4u
 
 The wrapper sets Madge's supported `madge_config` environment variable to the bundled `.madgerc`, then invokes the consumer-installed Madge CLI. Relative values such as `baseDir` and `tsConfig` continue to resolve from the consumer working directory.
 
+### Runtime-only dependencies
+
+The opt-in `runtime` preset excludes shallow npm packages and ignores TypeScript `import type` edges. This is useful when the question is what loads at runtime rather than what participates in the complete source graph:
+
+```json
+{
+ "scripts": {
+  "madge:runtime": "madge-nick2bad4u --preset runtime --json ./src"
+ }
+}
+```
+
+The wrapper consumes `--preset runtime` (or `--preset=runtime`) before forwarding all other arguments to Madge. The default preset is unchanged and continues to include npm and type-only dependencies.
+
 Direct filesystem usage is also supported:
 
 ```sh
 cross-env madge_config=node_modules/madge-config-nick2bad4u/.madgerc madge --circular ./src
+cross-env madge_config=node_modules/madge-config-nick2bad4u/presets/runtime.madgerc madge --json ./src
 ```
 
-Programmatic consumers can import `madgeConfig`, `madgeConfigPath`, `loadMadgeConfig()`, or `createMadgeConfig(overrides)` from `madge-config-nick2bad4u`.
+Programmatic consumers can select the same presets through the typed root API:
 
-Arrays supplied to `createMadgeConfig` replace shared arrays; nested objects are merged without mutating the package default.
+```js
+import {
+ createMadgePreset,
+ loadMadgeConfig,
+ madgeConfigPaths,
+ madgeRuntimeConfig,
+} from "madge-config-nick2bad4u";
+
+const runtime = createMadgePreset("runtime", {
+ graphVizOptions: { G: { rankdir: "TB" } },
+});
+
+const runtimeFromDisk = await loadMadgeConfig("runtime");
+console.log(
+ madgeConfigPaths.runtime,
+ madgeRuntimeConfig,
+ runtime,
+ runtimeFromDisk
+);
+```
+
+Arrays supplied to `createMadgeConfig` or `createMadgePreset` replace shared arrays. Known nested `detectiveOptions` and `graphVizOptions` entries are merged two levels deep without mutating either package preset. Invalid nested option shapes are rejected instead of silently ignored.
 
 ## Notes
 
 - Pass `--ts-config` when the consumer does not use `./tsconfig.json`.
 - `includeNpm` remains enabled to preserve the existing dependency-graph policy.
+- Madge 8 reads only the `G`, `E`, and `N` sections under `graphVizOptions`; the bundled presets keep graph, edge, and node attributes in those supported sections.
 - Graph images request the Inter font, but Graphviz will substitute another font when it is unavailable.
 - Madge 8 currently declares an optional TypeScript 5 peer range. TypeScript 6 consumers may need `npm install --force` until Madge widens that upstream range.
 

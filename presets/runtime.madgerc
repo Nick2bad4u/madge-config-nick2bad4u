@@ -4,10 +4,10 @@
     "cyclicNodeColor": "#ff5f6d",
     "detectiveOptions": {
         "ts": {
-            "skipTypeImports": false
+            "skipTypeImports": true
         },
         "tsx": {
-            "skipTypeImports": false
+            "skipTypeImports": true
         }
     },
     "edgeColor": "#4c5d80",
@@ -84,7 +84,7 @@
             "decorate": "true"
         }
     },
-    "includeNpm": true,
+    "includeNpm": false,
     "layout": "dot",
     "noDependencyColor": "#00bfa6",
     "nodeColor": "#1f4aff",
