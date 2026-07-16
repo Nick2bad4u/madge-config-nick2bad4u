@@ -172,26 +172,32 @@ export function createMadgeConfig(
     const clonedOverrides = structuredClone(overrides);
     const detectiveOverrides = clonedOverrides["detectiveOptions"];
     const graphVizOverrides = clonedOverrides["graphVizOptions"];
+    let detectiveOptions: unknown = clonedBase.detectiveOptions;
+    let graphVizOptions: unknown = clonedBase.graphVizOptions;
+
+    if (objectHasIn(clonedOverrides, "detectiveOptions")) {
+        detectiveOptions = isRecord(detectiveOverrides)
+            ? mergeNestedOptionRecords(
+                  clonedBase.detectiveOptions,
+                  detectiveOverrides
+              )
+            : detectiveOverrides;
+    }
+
+    if (objectHasIn(clonedOverrides, "graphVizOptions")) {
+        graphVizOptions = isRecord(graphVizOverrides)
+            ? mergeNestedOptionRecords(
+                  clonedBase.graphVizOptions,
+                  graphVizOverrides
+              )
+            : graphVizOverrides;
+    }
 
     return parseMadgeConfig({
         ...clonedBase,
         ...clonedOverrides,
-        detectiveOptions: objectHasIn(clonedOverrides, "detectiveOptions")
-            ? isRecord(detectiveOverrides)
-                ? mergeNestedOptionRecords(
-                      clonedBase.detectiveOptions,
-                      detectiveOverrides
-                  )
-                : detectiveOverrides
-            : clonedBase.detectiveOptions,
-        graphVizOptions: objectHasIn(clonedOverrides, "graphVizOptions")
-            ? isRecord(graphVizOverrides)
-                ? mergeNestedOptionRecords(
-                      clonedBase.graphVizOptions,
-                      graphVizOverrides
-                  )
-                : graphVizOverrides
-            : clonedBase.graphVizOptions,
+        detectiveOptions,
+        graphVizOptions,
     });
 }
 
