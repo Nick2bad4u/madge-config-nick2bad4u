@@ -284,6 +284,8 @@ jobs:
                   git push origin "$TAG"
 
             - name: "Generate release notes from git-cliff"
+              env:
+                  GITHUB_TOKEN: "${{ github.token }}"
               run: |
                   set -euo pipefail
                   mkdir -p temp
