@@ -1,7 +1,9 @@
 {
+    "$schema": "https://www.schemastore.org/madge.json",
     "backgroundColor": "#0b0f19",
     "baseDir": ".",
     "cyclicNodeColor": "#ff5f6d",
+    "dependencyFilter": false,
     "detectiveOptions": {
         "ts": {
             "skipTypeImports": true
@@ -84,6 +86,7 @@
             "decorate": "true"
         }
     },
+    "graphVizPath": false,
     "includeNpm": false,
     "layout": "dot",
     "noDependencyColor": "#00bfa6",
@@ -91,5 +94,7 @@
     "nodeShape": "box",
     "nodeStyle": "rounded",
     "rankdir": "LR",
-    "tsConfig": "./tsconfig.json"
+    "requireConfig": null,
+    "tsConfig": "./tsconfig.json",
+    "webpackConfig": null
 }

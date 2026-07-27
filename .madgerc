@@ -1,7 +1,9 @@
 {
+    "$schema": "https://www.schemastore.org/madge.json",
     "backgroundColor": "#0b0f19",
     "baseDir": ".",
     "cyclicNodeColor": "#ff5f6d",
+    "dependencyFilter": false,
     "detectiveOptions": {
         "ts": {
             "skipTypeImports": false
@@ -41,49 +43,50 @@
     "fontName": "Inter",
     "fontSize": "12px",
     "graphVizOptions": {
+        "E": {
+            "arrowhead": "vee",
+            "arrowsize": "1.0",
+            "color": "#4c5d80",
+            "decorate": "true",
+            "fontcolor": "#94a3c4",
+            "penwidth": "1.3"
+        },
         "G": {
             "bgcolor": "#0b0f19",
+            "color": "#172041",
             "concentrate": "true",
-            "rankdir": "LR",
+            "dpi": "96",
+            "fontcolor": "#e8f1ff",
             "fontname": "Inter",
             "fontsize": "12",
             "labeljust": "l",
             "labelloc": "t",
-            "color": "#172041",
-            "margin": "0.2,0.1",
-            "penwidth": "1.2",
-            "splines": "spline",
             "layout": "dot",
-            "dpi": "96",
-            "pad": "0.5",
-            "size": "10,10",
-            "ratio": "fill",
-            "overlap": "false",
+            "margin": "0.2,0.1",
             "nodesep": "0.5",
+            "overlap": "false",
+            "pad": "0.5",
+            "penwidth": "1.2",
+            "rankdir": "LR",
             "ranksep": "1.0",
-            "fontcolor": "#e8f1ff"
+            "ratio": "fill",
+            "size": "10,10",
+            "splines": "spline"
         },
         "N": {
-            "shape": "box",
-            "style": "rounded,filled",
-            "fontname": "Inter",
-            "fontsize": "11",
-            "fontcolor": "#e8f1ff",
             "color": "#1f4aff",
             "fillcolor": "#132145",
-            "width": "0.75",
+            "fontcolor": "#e8f1ff",
+            "fontname": "Inter",
+            "fontsize": "11",
             "height": "0.5",
-            "margin": "0.1"
-        },
-        "E": {
-            "color": "#4c5d80",
-            "fontcolor": "#94a3c4",
-            "penwidth": "1.3",
-            "arrowhead": "vee",
-            "arrowsize": "1.0",
-            "decorate": "true"
+            "margin": "0.1",
+            "shape": "box",
+            "style": "rounded,filled",
+            "width": "0.75"
         }
     },
+    "graphVizPath": false,
     "includeNpm": true,
     "layout": "dot",
     "noDependencyColor": "#00bfa6",
@@ -91,5 +94,7 @@
     "nodeShape": "box",
     "nodeStyle": "rounded",
     "rankdir": "LR",
-    "tsConfig": "./tsconfig.json"
+    "requireConfig": null,
+    "tsConfig": "./tsconfig.json",
+    "webpackConfig": null
 }
